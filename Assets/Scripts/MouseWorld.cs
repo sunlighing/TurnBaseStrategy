@@ -8,10 +8,15 @@ public class MouseWorld : MonoBehaviour
     private static MouseWorld instance;
 
     [SerializeField] private LayerMask mousePlaneLayerMask;
-   /// <summary>
-   /// Update is called every frame, if the MonoBehaviour is enabled.
-   /// </summary>
-   private void Update()
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    private void Update()
    {
         transform.position = MouseWorld.GetPosition();
    }
@@ -19,6 +24,7 @@ public class MouseWorld : MonoBehaviour
    public static Vector3 GetPosition(){
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, instance.mousePlaneLayerMask);
+        Debug.Log(raycastHit.point);
         return raycastHit.point;
     }
 }
