@@ -5,9 +5,15 @@ using UnityEngine;
 public class testing : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    [SerializeField] private Transform GridDebugObjectPrefab;
+
+    private GridSystem gridSystem;
     void Start()
     {
-        new GridSystem(10, 10,2f);
+        gridSystem = new GridSystem(10, 10,2f);
+
+        gridSystem.CreateDebugObjects(GridDebugObjectPrefab);
     }
 
 
