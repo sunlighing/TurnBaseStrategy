@@ -47,8 +47,13 @@ public class GridSystem : MonoBehaviour
             for(int z = 0; z<height; z++)
             {
                Transform debugTransform =  GameObject.Instantiate(debugPrefab, GetWorldPostion(x, z), Quaternion.identity);
-                debugTransform.position = new Vector3(x, z);
+                debugTransform.position = new Vector3(x,0, z);
             }
         }
+    }
+
+    public GridObject GetGridObject(GridPositon gridPositon)
+    {
+        return gridObjectArray[gridPositon.x, gridPositon.z];
     }
 }

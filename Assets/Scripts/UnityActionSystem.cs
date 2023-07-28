@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class UnityActionSystem : MonoBehaviour
+public class LevelGrid : MonoBehaviour
 {
-    public static UnityActionSystem Instance
+    public static LevelGrid Instance
     {
         get;
         private set;
