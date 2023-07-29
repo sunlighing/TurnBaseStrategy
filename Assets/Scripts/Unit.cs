@@ -10,6 +10,8 @@ public class Unit : MonoBehaviour
 
     private Vector3 targetPosition;
 
+    private GridPositon gridPositon;
+
     float moveSpeed = 4f;
 
     float rotateSpeed = 15f;
@@ -17,6 +19,12 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         targetPosition = transform.position;
+    }
+
+    private void Start()
+    {
+        gridPositon = LevelGrid.Instance.GetGridPositon(transform.position);
+        LevelGrid.Instance.AddUnitAtGridPosition(gridPositon,this);
     }
 
     public void Move(Vector3 targetPosition)
@@ -42,9 +50,17 @@ public class Unit : MonoBehaviour
             animator.SetBool("IsWalking", false);
         }
 
-       /// if (Input.GetMouseButtonDown(0))
-       // {
-      //      Move(MouseWorld.GetPosition());
-       // }
+        /// if (Input.GetMouseButtonDown(0))
+        // {
+        //      Move(MouseWorld.GetPosition());
+        // }
+     //   gridPositon = LevelGrid.Instance.GetGridPositon(transform.position);
+
+        GridPositon newgridPositon = LevelGrid.Instance.GetGridPositon(transform.position);
+        if(newgridPositon != gridPositon)
+        {
+            LevelGrid.Instance.UnitMoveGridPosition(this, gridPositon, newgridPositon);
+            gridPositon = newgridPositon;
+        }
     }
 }

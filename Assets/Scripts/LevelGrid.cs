@@ -26,25 +26,39 @@ public class LevelGrid : MonoBehaviour
 
         Instance = this;
 
-        gridSystem = new GridSystem(10, 10, 2f);
+        gridSystem = new GridSystem(10, 10, 3f);
         gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
     }
 
-    public void SetUnitAtGridPosition(GridPositon gridPositon,Unit unit)
+    public void AddUnitAtGridPosition(GridPositon gridPositon,Unit unit)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPositon);
-        gridObject.SetUnit(unit);
+        gridObject.AddUnit(unit);
     }
 
-    public Unit GetUnitAtGridPosition(GridPositon gridPositon)
+    public List<Unit> GetUnitListAtGridPosition(GridPositon gridPositon)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPositon);
-        return gridObject.GetUnit(); ;
+        return gridObject.GetUnitList(); ;
     }
 
-    public void ClearUnitAtGridPosition(GridPositon gridPositon)
+    public void RemoveUnitAtGridPosition(GridPositon gridPositon,Unit unit)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPositon);
-        gridObject.SetUnit(null);
+        gridObject.RemoveUnit(unit);
+    }
+
+   // public GridPositon GetGridPositon(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
+    
+    public void UnitMoveGridPosition(Unit unit,GridPositon fromGridPosition,GridPositon toGridPosition)
+    {
+        RemoveUnitAtGridPosition(fromGridPosition,unit); //清楚上个
+        AddUnitAtGridPosition(toGridPosition, unit); //指定下一个
+    
+    }
+
+    public GridPositon GetGridPositon(Vector3 worldPosition)
+    {
+        return gridSystem.GetGridPosition(worldPosition);
     }
 }

@@ -6,26 +6,37 @@ public class GridObject : MonoBehaviour
 {
     private GridSystem gridSystem;
     private GridPositon gridPositon;
-    private Unit unit;
+    private List<Unit> unitList;
 
     public GridObject(GridSystem gridSystem, GridPositon gridPositon)
     {
         this.gridSystem = gridSystem;
         this.gridPositon = gridPositon;
+        unitList = new List<Unit>();
     }
 
     public override string ToString()
     {
-        return gridPositon.ToString();
+        string unitString = "";
+        foreach(Unit unit in unitList)
+        {
+            unitString += unit + "\n";
+        }
+        return gridPositon.ToString() ;
     }
 
-    public void SetUnit(Unit unit)
+    public void AddUnit(Unit unit)
     {
-        this.unit = unit;
+        unitList.Add(unit);
     }
 
-    public Unit GetUnit()
+    public void RemoveUnit(Unit unit)
     {
-        return unit;
+        unitList.Remove(unit);
+    }
+
+    public List<Unit> GetUnitList()
+    {
+        return unitList;
     }
 }
