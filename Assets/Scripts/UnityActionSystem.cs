@@ -38,7 +38,7 @@ public class UnityActionSystem : MonoBehaviour
             {
                 return;
             }
-            selecteUnit.Move(MouseWorld.GetPosition());
+            selecteUnit.GetMoveAction().Move(MouseWorld.GetPosition());
         }
     }
 
